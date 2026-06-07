@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+</head>
+<body>
+    <div>
+        <form id="myForm">
+            <label for="name">Name:</label>
+            <input id="name" type="text" name="name" required>
+            <br>
+            <br>
+
+            <label for="age">Age:</label>
+            <input id="age" type="number" name="age" required>
+            <br>
+            <br>
+
+            <label>Gender:</label>
+            <input type="radio" name="gender" value="Male" required> Male
+            <input type="radio" name="gender" value="Female"> Female
+            <input type="radio" name="gender" value="Other"> Other
+            <br>
+            <br>
+
+            <label for="country">Country:</label>
+            <select name="country" id="country" required>
+                <option value="">Select Country</option>
+                <option value="India">India</option>
+                <option value="USA">USA</option>
+                <option value="Japan">Japan</option>
+                <option value="China">China</option>
+            </select>
+            <br>
+            <br>
+
+            <label>Tech Stack:</label><br>
+            <input type="checkbox" name="stack" value="HTML"> HTML
+            <input type="checkbox" name="stack" value="CSS"> CSS
+            <input type="checkbox" name="stack" value="JS"> JS
+            <input type="checkbox" name="stack" value="React"> React
+            <input type="checkbox" name="stack" value="React Native"> React Native
+            <br>
+            <br>
+
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" required></textarea>
+            <br>
+            <br>
+
+            <label for="number">Telephone:</label>
+            <input type="tel" id="number" name="number" required>
+            <br>
+            <br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <br>
+            <br>
+
+            <button type="reset">Reset</button>
+            <button type="button" onclick="submitForm()">Submit</button>
+        </form>
+
+        <br>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function submitForm() {
+            const form = document.getElementById("myForm");
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const name = document.getElementById("name").value;
+            const age = document.getElementById("age").value;
+            const gender = document.querySelector("input[name='gender']:checked").value;
+            const country = document.getElementById("country").value;
+            const address = document.getElementById("address").value;
+            const telephone = document.getElementById("number").value;
+            const email = document.getElementById("email").value;
+
+            const stack = document.querySelectorAll("input[name='stack']:checked");
+
+            let stackValues = [];
+
+            for (let i = 0; i < stack.length; i++) {
+                stackValues.push(stack[i].value);
+            }
+
+            let table = "<table border='1'>";
+            table += "<tr><th>Field</th><th>Value</th></tr>";
+            table += "<tr><td>Name</td><td>" + name + "</td></tr>";
+            table += "<tr><td>Age</td><td>" + age + "</td></tr>";
+            table += "<tr><td>Gender</td><td>" + gender + "</td></tr>";
+            table += "<tr><td>Country</td><td>" + country + "</td></tr>";
+            table += "<tr><td>Tech Stack</td><td>" + stackValues.join(", ") + "</td></tr>";
+            table += "<tr><td>Address</td><td>" + address + "</td></tr>";
+            table += "<tr><td>Telephone</td><td>" + telephone + "</td></tr>";
+            table += "<tr><td>Email</td><td>" + email + "</td></tr>";
+            table += "</table>";
+
+            document.getElementById("result").innerHTML = table;
+        }
+    </script>
+</body>
+</html>
